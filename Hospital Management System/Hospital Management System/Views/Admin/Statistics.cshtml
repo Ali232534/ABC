@@ -1,0 +1,192 @@
+﻿@{
+    ViewData["Title"] = "Statistics";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Statistics & Analytics</h1>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row">
+        <!-- Doctor Specializations -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Doctor Specializations</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="specializationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Revenue -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Monthly Revenue (Last 6 Months)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Statistics -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Monthly Statistics</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Revenue</th>
+                                    <th>Appointments</th>
+                                    <th>New Patients</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var stat in ViewBag.MonthlyStats)
+                                {
+                                    <tr>
+                                        <td>@stat.Month</td>
+                                        <td>₹@stat.Revenue.ToString("N2")</td>
+                                        <td>@stat.Appointments</td>
+                                        <td>@stat.Patients</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctor Performance -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Doctor Performance</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <th>Specialization</th>
+                                    <th>Total Appointments</th>
+                                    <th>Completed</th>
+                                    <th>Success Rate</th>
+                                    <th>Revenue Generated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var doctor in ViewBag.DoctorPerformance)
+                                {
+                                    <tr>
+                                        <td>@doctor.DoctorName</td>
+                                        <td>@doctor.Specialization</td>
+                                        <td>@doctor.TotalAppointments</td>
+                                        <td>@doctor.CompletedAppointments</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: @doctor.SuccessRate%"
+                                                     aria-valuenow="@doctor.SuccessRate"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                    @doctor.SuccessRate.ToString("F1")%
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>₹@doctor.RevenueGenerated.ToString("N2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Doctor Specializations Pie Chart
+        var specializationData = @Html.Raw(Json.Serialize(ViewBag.DoctorSpecializations));
+        var ctxPie = document.getElementById('specializationChart').getContext('2d');
+        var specializationChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: specializationData.map(item => item.specialization),
+                datasets: [{
+                    data: specializationData.map(item => item.count),
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b', '#858796', '#5a5c69'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#f4b619', '#e02d1b', '#707384', '#4a4c5a'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Revenue Bar Chart
+        var revenueData = @Html.Raw(Json.Serialize(ViewBag.RevenueData));
+        var ctxBar = document.getElementById('revenueChart').getContext('2d');
+        var revenueChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: revenueData.map(item => item.month),
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: revenueData.map(item => item.revenue),
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

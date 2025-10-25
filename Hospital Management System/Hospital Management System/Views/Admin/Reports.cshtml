@@ -1,0 +1,333 @@
+﻿@model HospitalManagementSystem.ViewModels.ReportViewModel
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Reports</h1>
+    </div>
+
+    <!-- Report Generation Form -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Generate Report</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="GenerateReport" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ReportType">Report Type</label>
+                                    <select asp-for="ReportType" class="form-control" asp-items="ViewBag.ReportTypes">
+                                        <option value="">Select Report Type</option>
+                                    </select>
+                                    <span asp-validation-for="ReportType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="FromDate">From Date</label>
+                                    <input asp-for="FromDate" type="date" class="form-control" />
+                                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ToDate">To Date</label>
+                                    <input asp-for="ToDate" type="date" class="form-control" />
+                                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-chart-bar"></i> Generate Report
+                                </button>
+
+                                @if (ViewBag.ReportData != null)
+                                {
+                                    <button type="button" class="btn btn-success" onclick="exportReport()">
+                                        <i class="fas fa-download"></i> Export to CSV
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Results -->
+    @if (ViewBag.ReportData != null)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">@ViewBag.ReportTitle</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                 aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#" onclick="exportReport()">
+                                    <i class="fas fa-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Export CSV
+                                </a>
+                                <a class="dropdown-item" href="#" onclick="window.print()">
+                                    <i class="fas fa-print fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.ReportType == "Appointments")
+                        {
+                            var reportData = ViewBag.ReportData as HospitalManagementSystem.ViewModels.AppointmentReportViewModel;
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Appointments
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@reportData.TotalAppointments</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Completed
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@reportData.CompletedAppointments</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Pending
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@reportData.PendingAppointments</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Cancelled
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@reportData.CancelledAppointments</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Appointment ID</th>
+                                            <th>Patient Name</th>
+                                            <th>Doctor Name</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var appointment in reportData.Appointments)
+                                        {
+                                            <tr>
+                                                <td>@appointment.AppointmentId</td>
+                                                <td>@appointment.PatientName</td>
+                                                <td>@appointment.DoctorName</td>
+                                                <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@appointment.AppointmentTime.ToString(@"hh\:mm")</td>
+                                                <td>
+                                                    <span class="badge badge-@(appointment.Status == "Completed" ? "success" :
+                                                                                                                        appointment.Status == "Scheduled" ? "warning" : "danger")">
+                                            @appointment.Status
+                                        </span>
+                                    </td>
+                                    <td>@appointment.Description</td>
+                                </tr>
+                                                                }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else if (Model.ReportType == "Revenue")
+                        {
+                            var reportData = ViewBag.ReportData as HospitalManagementSystem.ViewModels.FinancialReportViewModel;
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Revenue
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹@reportData.TotalRevenue.ToString("N2")</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Pending Amount
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹@reportData.TotalPendingAmount.ToString("N2")</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Paid Bills
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@reportData.PaidBills</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Pending Bills
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@reportData.PendingBills</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Bill ID</th>
+                                            <th>Patient Name</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Payment Method</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var bill in reportData.Bills)
+                                        {
+                                            <tr>
+                                                <td>@bill.BillId</td>
+                                                <td>@bill.PatientName</td>
+                                                <td>@bill.BillDate.ToString("dd/MM/yyyy")</td>
+                                                <td>₹@bill.TotalAmount.ToString("N2")</td>
+                                                <td>
+                                                    <span class="badge badge-@(bill.Status == "Paid" ? "success" : "warning")">
+                                                        @bill.Status
+                                                    </span>
+                                                </td>
+                                                <td>@bill.PaymentMethod</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else if (Model.ReportType == "Patients" || Model.ReportType == "Doctors")
+                        {
+                            var items = ViewBag.ReportData as dynamic;
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            @if (Model.ReportType == "Patients")
+                                            {
+                                                <th>Patient ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Registration Date</th>
+                                            }
+                                            else
+                                            {
+                                                <th>Doctor ID</th>
+                                                <th>Name</th>
+                                                <th>Specialization</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Consultation Fee</th>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in items)
+                                        {
+                                            <tr>
+                                                @if (Model.ReportType == "Patients")
+                                                {
+                                                    <td>@item.PatientId</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.Phone</td>
+                                                    <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@item.DoctorId</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.Specialization</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.Phone</td>
+                                                    <td>₹@item.ConsultationFee.ToString("N2")</td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function exportReport() {
+            var reportType = '@Model.ReportType';
+            var fromDate = '@Model.FromDate.ToString("yyyy-MM-dd")';
+            var toDate = '@Model.ToDate.ToString("yyyy-MM-dd")';
+
+            window.location.href = '@Url.Action("ExportReport")' +
+                '?reportType=' + reportType +
+                '&fromDate=' + fromDate +
+                '&toDate=' + toDate;
+        }
+
+        // Set max date for ToDate to today
+        document.getElementById('ToDate').max = new Date().toISOString().split('T')[0];
+        document.getElementById('FromDate').max = new Date().toISOString().split('T')[0];
+    </script>
+}

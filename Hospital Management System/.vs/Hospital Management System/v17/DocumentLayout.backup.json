@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\viual studio 2022\\Projects\\Hospital Management System\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|g:\\viual studio 2022\\projects\\hospital management system\\hospital management system\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|g:\\viual studio 2022\\projects\\hospital management system\\hospital management system\\views\\admin\\statistics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\views\\admin\\statistics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|g:\\viual studio 2022\\projects\\hospital management system\\hospital management system\\views\\admin\\reports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\views\\admin\\reports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|g:\\viual studio 2022\\projects\\hospital management system\\hospital management system\\views\\admin\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\views\\admin\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|g:\\viual studio 2022\\projects\\hospital management system\\hospital management system\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|g:\\viual studio 2022\\projects\\hospital management system\\hospital management system\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F377970-D730-4A0B-B4AF-025C67170DBA}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "Hospital Management System\\Views\\Admin\\_AdminLayout.cshtml",
+              "ToolTip": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\_AdminLayout.cshtml*",
+              "RelativeToolTip": "Hospital Management System\\Views\\Admin\\_AdminLayout.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-12T14:24:08.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\Controllers\\AdminController.cs",
+              "ToolTip": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Hospital Management System\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T15:10:05.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Controllers\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\Controllers\\AppointmentController.cs",
+              "ToolTip": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Controllers\\AppointmentController.cs",
+              "RelativeToolTip": "Hospital Management System\\Controllers\\AppointmentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T14:14:50.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Hospital Management System\\Views\\Admin\\Dashboard.cshtml",
+              "ToolTip": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\Dashboard.cshtml*",
+              "RelativeToolTip": "Hospital Management System\\Views\\Admin\\Dashboard.cshtml*",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAAANgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-12T14:19:30.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Reports.cshtml",
+              "DocumentMoniker": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\Reports.cshtml",
+              "RelativeDocumentMoniker": "Hospital Management System\\Views\\Admin\\Reports.cshtml",
+              "ToolTip": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\Reports.cshtml*",
+              "RelativeToolTip": "Hospital Management System\\Views\\Admin\\Reports.cshtml*",
+              "ViewState": "AgIAABYBAAAAAAAAAAAAAEwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-12T14:20:01.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Statistics.cshtml",
+              "DocumentMoniker": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\Statistics.cshtml",
+              "RelativeDocumentMoniker": "Hospital Management System\\Views\\Admin\\Statistics.cshtml",
+              "ToolTip": "G:\\viual studio 2022\\Projects\\Hospital Management System\\Hospital Management System\\Views\\Admin\\Statistics.cshtml*",
+              "RelativeToolTip": "Hospital Management System\\Views\\Admin\\Statistics.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAL8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-12T14:20:41.582Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
